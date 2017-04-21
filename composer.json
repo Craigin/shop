@@ -1,0 +1,14 @@
+{
+    "require": {
+        "twig/twig": "^1.31",
+        "catfan/Medoo": "^1.1",
+        "siriusphp/upload": "^2.1"
+    } ,
+    "autoload": {
+        "psr-4": {
+            "lib\\": "lib/",
+            "admin\\": "admin/"
+        } ,
+        "classmap": ["admin/"]
+    }
+}
