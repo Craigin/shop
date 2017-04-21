@@ -1,0 +1,162 @@
+{% extends 'base.twig' %}
+{% block style %}
+    <style>
+        .table thead tr th{
+            height:60px; line-height: 60px; text-align: center;}
+        .table tbody tr td{
+            height:100px; line-height: 50px; text-align: center;}
+    </style>
+    <link href="template/plugins/pnotify/css/pnotify.custom.css" rel="stylesheet" type="text/css">
+    <script src="template/plugins/pnotify/js/pnotify.custom.js" type="text/javascript"></script>
+{% endblock %}
+{% block content %}
+<!--main content start-->
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row mt">
+            <div class="col-lg-12">
+                <div class="content-panel">
+                    <h4><i class="fa fa-directory"></i> 所有产品
+
+                        <a class="btn btn-success pull-right" href="product.php?act=edit"> 增加产品 </a>
+                        <a class="btn btn-success pull-right" style="margin-right: 10px;" onclick="downloadexcel()"> 导出域名 </a>
+                    </h4>
+
+                    <section class="filter bg-warning" style="padding: 10px 0;">
+                            <form action="product.php">
+                                <div class ="row">
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 col-sm-4 text-right"> 产品名称 </label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control " type="text" name="title" value="{{ filter.title }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 col-sm-4 text-right"> 域名 </label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control " type="text" name="domain" value="{{ filter.domain }}">
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 col-sm-4 text-right"> 模板 </label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control " type="text" name="theme" value="{{ filter.theme }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i> 搜素 </button>
+                                    </div>
+                                    
+                                </div>
+                            </form>
+                    </section>
+                    
+                    <section id="unseen">
+                        <table class="table table-bordered ">
+                            <thead>
+                            <tr>
+                                <th height="60px">product_id</th>
+                                <th>缩略图</th>
+                                <th>名称</th>
+                                <th>价格</th>
+                                <th>域名</th>
+                                <th>语言包</th>
+                                <th>添加时间</th>
+                                <th>销量</th>
+                                <th>库存</th>
+                                <th>主题</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for g in goodsList %}
+                            <tr {% if g.is_del ==1 %} class ='bg-danger' {% endif %}>
+                                <td>{{ g.product_id }}</td>
+                                <td><a href="http://{{ g.domain }}/index.php?path={{ g.identity_tag }}"><img src="{{ g.thumb }}" width="100" height="100"></a></td>
+                                <td><a href="http://{{ g.domain }}/index.php?path={{ g.identity_tag }}">{{ g.title }}</a> </td>
+                                <td>
+                                    <a class="text-danger">
+                                        {% if g.currency_prefix == 1 %}{{ g.currency_code }} {{ g.price }}{% else %} {{ g.price }}{{ g.currency_code }} {% endif %}</a>
+                                
+                                </td>
+                                <td><a href="http://{{ g.domain }}" target="_BLANK">{{ g.domain }}</a></td>
+                                <td>{{ g.lang }}</td>
+                                <td>{{ g.add_time }}</td>
+                                <td>{{ g.sales }}</td>
+                                <td>{{ g.stock }}</td>
+                                <td>{{ g.theme }}</td>
+                                <td>
+                                    {% if g.is_del ==1 %}
+                                        <button type="button" class="btn btn-success" onclick="delproduct({{ g.product_id }},0);"><i class="fa fa-edit"></i> 恢复 </button>
+                                    {% else %}
+                                        <a class="btn btn-primary" href="product.php?&product_id={{ g.product_id }}&act=edit"> <i class="fa fa-edit"> </i> 编辑 </a>
+                                        <button type="button" class="btn btn-danger" onclick="delproduct({{ g.product_id }},1);"><i class="fa fa-edit"></i> 删除 </button>
+                                    {% endif %}
+                                   
+                                </td>
+                            
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        
+                       <div class="text-center">
+                           {{ pageHtml|raw }}
+                       </div>
+                    </section>
+                </div><!-- /content-panel -->
+            </div><!-- /col-lg-4 -->
+        </div><!-- /row -->
+    </section>
+</section>
+    <script type="text/javascript">
+        function delproduct(product_id,is_del) {
+          
+            var url = 'product.php?' ;
+            var json = {product_id:product_id,is_del:is_del,act:"del"};
+            $.ajax({
+                url : url,
+                data : json,
+                type : "post",
+                dataType:"json",
+                
+                success : function(data) {
+                if(data.ret)
+                {
+                    location.reload()
+                }
+                else{
+                    new PNotify({
+                        title: '错误！！',
+                        text: data.msg,
+                        type: 'error',
+                        addclass: 'stack-bar-top'
+                    });
+                }
+
+            },
+            error:function(XMLHttpRequest, textStatus, errorThrown){
+                alert(errorThrown);
+            }
+
+        });
+
+        }
+        function   downloadexcel(){
+            var msg = "您真的确定要导出产品域名到Excel表中吗？\n\n请确认！";
+            if (confirm(msg)==true){
+                window.location.href="product.php?act=downloadexcel";
+            }else{
+                return false;
+            }
+        }
+
+    </script>
+{% endblock %}

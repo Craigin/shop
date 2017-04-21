@@ -1,0 +1,49 @@
+<?php
+   return[
+       'email' =>'sales@jtoyp.com',
+       'domainList'=>array(
+       //1部：
+           'mstij.com',
+           'gsrge.com',
+           'www.mstij.com',
+           'www.gsrge.com',
+       //2部：
+           'tmnnyfr.com',
+           'xrypp.com',
+           'www.tmnnyfr.com',
+           'www.xrypp.com',
+       //3部：
+           'nlaut.com',
+           'uoaci.com',
+           'www.nlaut.com',
+           'www.uoaci.com',
+       // 4部
+           'liljk.com',
+           'tzbqplk.com',
+           'www.liljk.com',
+           'www.tzbqplk.com',
+       //5部：
+           'vqmom.com',
+           'qcekz.com',
+           'www.vqmom.com',
+           'www.qcekz.com',
+       //7部：
+           'uacwf.com',
+           'www.uacwf.com',
+        //8部：
+           'bkzix.com',
+           'www.bkzix.com',
+        //9部：
+           'lhvne.com',
+           'www.lhvne.com',
+        //10部：
+           'nprdr.com',
+           'www.nprdr.com',
+        //11部：
+           'dzlff.com',
+           'www.dzlff.com',
+        //forlocal
+           'www.stoshop.com',
+       ),
+   ] ;
+

@@ -1,0 +1,73 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            
+            <div class="row">
+                <div class="col-lg-9 main-chart">
+                    
+                    <div class="row mtbox">
+                        <div class="col-md-2 col-sm-2 col-md-offset-1 box0">
+                            <div class="box1">
+                                <span class="li_shop"></span>
+                                <h4>所有订单</h4>
+                                <h3><a href="order.php?">{{ allOrderNum }}</a></h3>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2 box0">
+                            <div class="box1">
+                                <span class="li_params"></span>
+                                <h4>今日新增</h4>
+                                <h3><a href="order.php?">+{{ dayOrderNum }}</a></h3>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2 box0">
+                            <div class="box1">
+                                <span class="li_stack"></span>
+                                <h4>所有产品</h4>
+                                <h3><a href="product.php?">{{ product }}</a></h3>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2 box0">
+                            <div class="box1">
+                                <span class="li_params"></span>
+                                <h4>今日新增</h4>
+                                <h3><a href="product.php?">+{{ dayProductNum }}</a></h3>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2 box0">
+                            <div class="box1">
+                                <span class="li_key"></span>
+                                <h4>通信失败</h4>
+                                <h3><a href="order.php?erp_status=FAIL"> {{ failNum }} </a></h3>
+                            </div>
+                        </div>
+                    </div><!-- /row mt -->
+                </div><!-- /col-lg-3 -->
+            </div><! --/row -->
+        </section>
+    </section>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var unique_id = $.gritter.add({
+                // (string | mandatory) the heading of the notification
+                title: 'welcome',
+                // (string | mandatory) the text inside the notification
+                text: ' <a style="color:#ffd777">欢迎登录石头信息科技有限公司后台管理系统</a>.',
+                // (string | optional) the image to display on the left
+               // image: 'assets/img/ui-sam.jpg',
+                // (bool | optional) if you want it to fade out on its own or just sit there
+                sticky: true,
+                // (int | optional) the time you want it to be alive for before fading out
+                time: '',
+                // (string | optional) the class name you want to apply to that specific message
+                class_name: 'my-sticky-class'
+            });
+
+            return false;
+        });
+    </script>
+{% endblock %}

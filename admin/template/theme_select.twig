@@ -1,0 +1,158 @@
+<style>
+    #mode_select img {padding: 5px; border: solid 1px #ddd; }
+    #mode_select .selected { color: #ff9900;  }
+    #mode_select .selected img {padding: 4px; border: solid 2px #ff6600; cursor: pointer;}
+
+#mode_select .panel {
+    border: none;
+    box-shadow: none;
+}
+#mode_select .panel .panel-heading {
+    border-bottom: solid 1px #ddd;
+}
+#mode_select .panel .panel-heading > * {
+    font-weight: normal;
+    font-size: 16px;
+    margin: 5px 0px;
+}
+#mode_select .panel .panel-body {
+    line-height: 30px;
+}
+</style>
+
+<div id="mode_select" data-select="" >
+    <!--  -->
+    <div class="panel">
+        <div class="panel-heading"><h4>台湾模版</h4></div>
+        <div class="panel-body">
+            <div class="col-md-2">
+                <label>
+                    <input type="radio" name="theme" value="style6" style="position: absolute; opacity: 0">
+                    <img src="/theme/style6/preview.png" alt="style6" class="img-responsive">
+                    <p>style6</p>
+                 </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    <input type="radio" name="theme" value="style5+timer" style="position: absolute; opacity: 0">
+                    <img src="/theme/style5+timer/preview.png" alt="style5+timer" class="img-responsive">
+                    <p>style5+timer</p>
+                 </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    <input type="radio" name="theme" value="wnczxzd.com" style="position: absolute; opacity: 0">
+                    <img src="/theme/wnczxzd.com/preview.png" alt="wnczxzd.com" class="img-responsive">
+                    <p>wnczxzd.com</p>
+                 </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    <input type="radio" name="theme" value="lxxdw.com" style="position: absolute; opacity: 0">
+                    <img src="/theme/lxxdw.com/preview.png" alt="lxxdw.com" class="img-responsive">
+                    <p>lxxdw.com</p>
+                 </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    <input type="radio" name="theme" value="blue(TW)" style="position: absolute; opacity: 0">
+                    <img src="/theme/blue(TW)/preview.png" alt="blue(TW)" class="img-responsive">
+                    <p>blue(TW)</p>
+                 </label>
+            </div>
+
+            <div class="col-md-2">
+                <label>
+                    <input type="radio" name="theme" value="tw5" style="position: absolute; opacity: 0">
+                    <img src="/theme/tw5/preview.png" alt="tw5" class="img-responsive">
+                    <p>tw5</p>
+                 </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    <input type="radio" name="theme" value="xlzdnu.com" style="position: absolute; opacity: 0">
+                    <img src="/theme/xlzdnu.com/preview.png" alt="xlzdnu.com" class="img-responsive">
+                    <p>xlzdnu.com</p>
+                 </label>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <div class="panel">
+        <div class="panel-heading"><h4>外文模版</h4></div>
+        <div class="panel-body">
+            <div class="col-md-2">
+                <label>
+                    <input type="radio" name="theme" value="style8(en)" style="position: absolute; opacity: 0">
+                    <img src="/theme/style8(en)/preview.png" alt="style8(en)" class="img-responsive">
+                    <p>style8(en)</p>
+                 </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    <input type="radio" name="theme" value="style7" style="position: absolute; opacity: 0">
+                    <img src="/theme/style7/preview.png" alt="style7" class="img-responsive">
+                    <p>style7</p>
+                 </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    <input type="radio" name="theme" value="Black(EN)" style="position: absolute; opacity: 0">
+                    <img src="/theme/Black(EN)/preview.png" alt="Black(EN)" class="img-responsive">
+                    <p>Black(EN)</p>
+                 </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    <input type="radio" name="theme" value="style7(yn)" style="position: absolute; opacity: 0">
+                    <img src="/theme/style7(yn)/preview.png" alt="style7(yn)" class="img-responsive">
+                    <p>style7(yn)</p>
+                </label>
+            </div>
+            <div class="col-md-2">
+                <label>
+                    <input type="radio" name="theme" value="wnczxzd.com(jp)" style="position: absolute; opacity: 0">
+                    <img src="/theme/wnczxzd.com(jp)/preview.png" alt="wnczxzd.com(jp)" class="img-responsive">
+                    <p>wnczxzd.com(jp)</p>
+                </label>
+            </div>
+
+        </div>
+    </div>
+    <!-- {% for d in themes %} -->
+        <!-- <div class="col-md-2 {% if theme %} {% if theme ==d %} selected {% endif %} {% else %}  {% if loop.index==1 %} selected {% endif %}  {% endif %}">
+            <label>
+                <input type="radio" name="theme" value="{{ d }}" checked style="position: absolute; opacity: 0">
+                <img src="/theme/{{d}}/preview.png" alt="{{d}}" class="img-responsive">
+                <p>{{ d }}</p>
+             </label>
+        </div> -->
+    <!-- {% endfor %} -->
+    <input name="theme" type="hidden" value="{% if theme %}{{ theme }}{% else %}{{ themes.0 }}{% endif %}" id="setTheme">
+
+</div>
+
+
+
+<script type="text/javascript">
+    $(function(){
+        var module = $('#mode_select');
+
+        (function(theme){
+            module.find('input[value="'+theme+'"]').parents('.col-md-2').addClass('selected');
+        })("{{ theme }}");
+
+        $('#mode_select').on('click', 'img', function(event) {
+            event.preventDefault();
+            /* Act on the event */
+            var ff = $(this).parent().parent();
+                ff.addClass('selected');
+            $('#mode_select .col-md-2').not(ff).removeClass('selected');
+            var theme = $(this).attr('alt');
+            $('#setTheme').val(theme);
+        });
+        $('#mode_select img').error(function() {
+            $(this).attr('src', '/public/preview.png');
+        });
+    });
+</script>

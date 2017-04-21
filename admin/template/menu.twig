@@ -1,0 +1,35 @@
+<!--sidebar start-->
+<aside>
+    <div id="sidebar"  class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu" id="nav-accordion">
+            
+            <p class="centered"><img src="template/assets/img/ui-sam.jpg" class="img-circle" width="60"></p>
+            <h5 class="centered">Hi , {{ admin.username }}</h5>
+            <p class="text-center"><a class="logout text-danger" href="index.php?act=logout">[注销]</a></p>
+            <li class="mt">
+                <a href="index.php">
+                    <i class="fa fa-dashboard"></i>
+                    <span>首页</span>
+                </a>
+            </li>
+            
+            <li class="sub-menu">
+                <a href="javascript:;" class="active">
+                    <i class="fa fa-desktop"></i>
+                    <span>功能</span>
+                </a>
+                <ul class="sub">
+                    <li><a  href="product.php?">产品管理</a></li>
+                    <li><a  href="comment.php"> 产品评论 </a></li>
+                    <li><a  href="order.php?">订单管理</a></li>
+                    <li><a  href="user.php"> 管理员 </a></li>
+                </ul>
+            </li>
+        
+        </ul>
+        <!-- sidebar menu end-->
+    </div>
+</aside>
+
+<!--sidebar end-->

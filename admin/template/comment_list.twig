@@ -1,0 +1,96 @@
+{% extends 'base.twig' %}
+{% block style %}
+    <style>
+        .table thead tr th{
+            height:30px; line-height: 30px; text-align: center;}
+        .table tbody tr td{
+            height:30px; line-height: 30px; text-align: center;}
+    </style>
+    <link href="template/plugins/pnotify/css/pnotify.custom.css" rel="stylesheet" type="text/css">
+    <script src="template/plugins/pnotify/js/pnotify.custom.js" type="text/javascript"></script>
+{% endblock %}
+{% block content %}
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row mt">
+            <div class="col-lg-12">
+                <div class="content-panel">
+                    <h4><i class="fa fa-directory"></i> 所有评论  <a class="btn btn-success pull-right" href="comment.php?act=edit"> 增加评论 </a></h4>
+                    <section id="unseen">
+                        <table class="table table-bordered ">
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>产品</th>
+                                <th>姓名</th>
+                                <th>添加时间</th>
+                                <th width="40%">评论</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for g in goodsList %}
+                            <tr class="{% if g.is_del==1 %}bg-danger{% endif %}">
+                                <td>{{ g.comment_id }}</td>
+                                <td>{{ g.title }}</td>
+                                <td>{% if g.is_anonymous %} 匿名 {% else %} {{ g.name }} {% endif %}</td>
+                                <td>{{ g.add_time }}</td>
+                                <td>{{ g.content }}</td>
+                                <td>
+                                    
+                                    {% if g.is_del ==1 %}
+                                        <a class="btn btn-success" onclick="delproduct({{ g.comment_id }},0);"><i class="fa fa-edit"></i> 恢复 </a>
+                                    {% else %}
+                                        <a class="btn btn-primary" href="comment.php?comment_id={{ g.comment_id }}&act=edit"><i class="fa fa-edit"></i> 编辑</a>
+                                        <a class="btn btn-danger"  onclick="delproduct({{ g.comment_id }},1);"><i class="fa fa-edit"></i> 删除 </a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <div class="text-center">
+                            {{ pageHtml|raw }}
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+    <script type="text/javascript">
+        function delproduct(product_id,is_del) {
+
+            var url = 'comment.php?' ;
+            var json = {comment_id:product_id,is_del:is_del,act:"del"};
+            $.ajax({
+                url : url,
+                data : json,
+                type : "post",
+                dataType:"json",
+
+                success : function(data) {
+                    if(data.ret)
+                    {
+                        location.reload()
+                    }
+                    else{
+                        new PNotify({
+                            title: '错误！！',
+                            text: data.msg,
+                            type: 'error',
+                            addclass: 'stack-bar-top'
+                        });
+                    }
+
+                },
+                error:function(XMLHttpRequest, textStatus, errorThrown){
+                    alert(errorThrown);
+                }
+
+            });
+
+
+        }
+    </script>
+{% endblock %}
