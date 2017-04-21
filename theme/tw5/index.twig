@@ -1,0 +1,111 @@
+{% include 'public/theme/header.twig' %}
+<!-- resource -->
+<link href="{{ THEME }}/css/styles.css" rel="stylesheet">
+<link href="{{ THEME }}/css/singleActive.css" rel="stylesheet">
+<link href="{{ THEME }}/image/favicon.ico" type="image/x-icon" rel=icon>
+<link href="{{ THEME }}/css/swiper-3.4.0.min.css" rel="stylesheet">
+<script src="public/jquery-2.2.3.min.js"></script>
+
+<!--  -->
+
+<header><h1>{{ title }}</h1></header>
+<h3 class="top_price">{{ currency_code }}{{ price }}</h3>
+<!--  -->
+<div class="swiper-container">
+    <div class="swiper-wrapper" style="height: 354px; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
+        {% if photos %}
+            {% for p in photos %}
+                <div class="swiper-slide"><img width="100%" src="{{ p.thumb }}"></div>
+            {% endfor %}
+        {% else %}
+            <div class="swiper-slide"><img width="100%" src="{{ thumb }}"></div>
+        {% endif %}
+    </div>
+    <div class="swiper-pagination swiper-pagination-custom">
+        {% if photos %}
+            {% for p in photos %}
+                <span class="whiteicon"></span>
+            {% endfor %}
+        {% else %}
+            <span class="whiteicon"></span>
+        {% endif %}
+    </div>
+</div>
+<div class="small_bg">
+    <div class="img_content">
+        {% for p in photos %}
+            <img src="{{ p.thumb}}" >
+        {% endfor %}
+    </div>
+</div>
+<div class="big_banner">
+    <div></div>
+    {% for p in photos %}
+        <img src="{{ p.thumb}}" >
+    {% endfor %}
+</div>
+
+
+<div class="inforContent">
+    <div class="i-p-top">
+
+        <div class="i-p-b">
+            <span class="soldPart">{{ lang.buyed_num }}<span id="soldNum" style="color: red;">{{ sales }}</span>{{ lang.piece }}</span>
+    </div>
+    <div class="i-p-m buyinfo_post">
+        <span class="flag1">{{ lang.flash_sale }}</span>
+        <span class="timeWrap">{{ lang.time_last }}
+        <span id="timer">
+               <span  id="h">10</span>
+                <span class="colon">:</span>
+                <span id="m">00</span>
+                <span class="colon">:</span>
+                <span id="s">00</span>
+                <span class="colon"></span>
+          </span>
+        </span>
+    </div>
+    <div id="here"></div>
+
+        <ul class="m-servicePolicy">
+            <li class="item"><i class="u-con1"></i><span>{{ lang.free_postage }}</span></li>
+            <li class="item"><i class="u-con2"></i><span>{{ lang.cash_on_delivery }}</span></li>
+            <li class="item"><i class="u-con3"></i><span>{{ lang.support_refunds }}</span></li>
+        </ul>
+
+
+</div>
+
+<div class="bTop">
+    <span class="bTitle bTitle1">{{ lang.product_desc }}</span>
+    <div class="line"></div>
+</div>
+<div class="detail_info_wrap">
+    <div class="detail_list" id="detailCont">
+        <div class="detail_item p_desc" id="detail_tab1" style="padding:4px 4px;">
+            <div id="commDesc" class="detail_pc">
+                <!-- 后台商品介绍 开始-->
+                <div class="detail_con">
+                    {{ content|raw }}
+                </div>
+            </div>
+        </div>
+    
+        <div class="fixednav">
+            <ul class="nav-list">
+                <li>
+                    <a href="javascript:;" class="left" onclick="P8.startGroupChat({{ service_contact_id }},1);">{{ lang.customs_server }}</a>
+                </li>
+                <li id="btn_buy">
+                    <a href="javascript:void (0);" class="conbtn">
+                        <span>{{ lang.buy_now }}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="{{ THEME }}/js/swiper-3.4.0.jquery.min.js"></script>
+<script src="{{ THEME }}/js/index.js"></script>
+{% include 'public/theme/footer.twig' %}

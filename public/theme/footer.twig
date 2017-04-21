@@ -1,0 +1,17 @@
+<!-- 客服系统 -->
+<script language="javascript" src="http://api.pop800.com/800.js?n={{ service_contact_id }}&s=01&p=l&l=cn"></script>
+<!--  -->
+<div class="5a_la" style="display: none;">{{ la|raw }}</div>
+<!-- global function -->
+<script type="text/javascript">
+	$(function(){
+		if( $(".edui-upload-video").length > 0 ){
+		    $(".edui-upload-video").attr("poster", "/public/image/videoPlay.jpg");
+		    $(".edui-upload-video").click(function(){
+		        $(this).get(0).play();
+		    });
+		}
+	});
+</script>
+<!--  -->
+</body></html>
