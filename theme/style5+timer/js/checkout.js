@@ -34,10 +34,15 @@ function minnumber(){
         refresh_price() ;
     }
 }
-    
+//获取url参数
+function getQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]); return null;
+}
 function refresh_price() {
     $.ajax({
-        url: '/checkout.php?',
+        url: '/checkout.php?path='+getQueryString('path'),
         type: 'post',
         data: $('input[name=combo_id], #act, input[name=\'num\']'),
         dataType: 'json',

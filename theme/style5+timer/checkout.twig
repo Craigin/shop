@@ -17,7 +17,7 @@
 
     <div id="order">
         <div class="warp">
-            <form id="form" name="form" action="order.php" method="post" onSubmit="return postcheck()">
+            <form id="form" name="form" action="order.php?path={{path}}" method="post" onSubmit="return postcheck()">
                 <!--  -->
                 <input type="hidden" name="combo_id" value="">
                 <input type="hidden" name="token" value="{{ token }}">

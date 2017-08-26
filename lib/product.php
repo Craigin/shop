@@ -48,6 +48,7 @@ class product{
          //获取地址
          $region =  new \lib\region($this->register);
          $regions  = $region->getRegion($lang);
+         if($regions['region_code']=='TW')$regions['region_name']='台灣';
          $product['regions']  = $regions;
          $product['token']  = $_SESSION['token'] ;
          if(!$_SESSION['token'])
@@ -59,18 +60,18 @@ class product{
         $product['price'] = round(money_int( $product['price'],'float'));
         $product['market_price'] = round(money_int( $product['market_price'],'float'));
 
-        $IP_info=$this->GetIpLookup($IP);
-        if($IP_info['province']=='台湾'){
-            $product['currency_code']='NT$';
-        }else if($IP_info['province']=='香港'){
-            $product['currency_code']='HK$';
-            $product['price'] = round(money_int( $product['hk_price'],'float'));
-            $product['market_price'] = round(money_int( $product['hk_market_price'],'float'));
-        }else if($IP_info['province']=='澳门'){
-            $product['currency_code']='MOP';
-            $product['price'] = round(money_int( $product['mc_price'],'float'));
-            $product['market_price'] = round(money_int( $product['mc_market_price'],'float'));
-        }
+//        $IP_info=$this->GetIpLookup($IP);
+//        if($IP_info['province']=='台湾'){
+//            $product['currency_code']='NT$';
+//        }else if($IP_info['province']=='香港'){
+//            $product['currency_code']='HK$';
+//            $product['price'] = round(money_int( $product['hk_price'],'float'));
+//            $product['market_price'] = round(money_int( $product['hk_market_price'],'float'));
+//        }else if($IP_info['province']=='澳门'){
+//            $product['currency_code']='MOP';
+//            $product['price'] = round(money_int( $product['mc_price'],'float'));
+//            $product['market_price'] = round(money_int( $product['mc_market_price'],'float'));
+//        }
         $product['discount_price'] = $product['price'];
         return $product;
     }

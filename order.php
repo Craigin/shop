@@ -1,8 +1,7 @@
 <?php
 require_once 'lib/ini.php';
-$ret = $product->getProduct();
+$ret = $product->getProduct($_REQUEST['path']);
 $theme = $ret['theme'];
-
 //验证token
 $token =  I("post.token");
 if($_SESSION['token'] =="" || $_SESSION['token'] != $token)
@@ -196,6 +195,7 @@ $info['payment_type'] = $payment_type;
 $info['post_erp_data'] = json_encode($order_data,JSON_UNESCAPED_UNICODE);
 $info['attr_value'] = $attr_value;
 $info['add_time'] = date('Y-m-d H:i:s',time());
+if($province=='台灣')$province='台灣';
 $addressStr =   $country.' '.$province.' '.$city.' '.$district.' '.$address  ;
 if($province_id == 3409||$province_id == 63||$province_id == 68)
 {
@@ -235,7 +235,6 @@ $info['addressStr'] =  $addressStr;
              $ret['add_time'] =  $info['add_time'] ;
              $ret['THEME'] =  'theme/'.$ret['theme'];
              $ret['num'] = $number;
-
              if(money_int($price['price']) != money_int($ret['price']) )
              {
                  $ret['market_price'] = round($price['price'] / ($ret['price'] / $ret['market_price']));
@@ -246,7 +245,8 @@ $info['addressStr'] =  $addressStr;
                  $attr_name = $product_attr_price->getAttrName($attr_value);
                  $ret['attr_name'] = $attr_name;
              }
-
+             $ret['path']=$_REQUEST['path'];
+             //die(print_r($ret));
              $view->display('success.twig',$ret);
              exit;
          }

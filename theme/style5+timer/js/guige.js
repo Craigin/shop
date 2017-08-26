@@ -60,7 +60,7 @@ function inputnumber(){
 // 刷新价格
 function refresh_price() {
     $.ajax({
-        url: '/checkout.php?',
+        url: '/checkout.php?path='+getQueryString('path'),
         type: 'post',
         data: $('#comb input[checked=checked], #act, input[name=\'num\']'),
         dataType: 'json',
@@ -78,7 +78,12 @@ function refresh_price() {
         }
     });
 }
-
+//获取url参数
+ function getQueryString(name) {
+     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+     var r = window.location.search.substr(1).match(reg);
+     if (r != null) return unescape(r[2]); return null;
+ }
 // 提交表单
 function postcheckGuige() {
     var url = "/checkout.php?";
@@ -90,7 +95,8 @@ function postcheckGuige() {
     // 产品ID
     var comb_id = $("#comb .tab-sel").find('input').val();
     url = url + "&comb_id="+comb_id;
-    
+    var path=getQueryString('path');
+    url+="&path="+path;
     /* Act on the event */
     if( $('.u-format.count_atrr').length > 0 ){
         var prototype = [];

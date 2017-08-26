@@ -2,8 +2,8 @@
 require_once 'lib/ini.php';
 //$IP=$_SERVER['REMOTE_ADDR'];
 //$IP='118.193.131.45';//香港
-$IP=' 202.175.45.210';//澳门
-$ret = $product->getProduct($_REQUEST['path'],$IP);
+//$IP=' 202.175.45.210';//澳门
+$ret = $product->getProduct($_REQUEST['path']);
 if($_POST['act'] &&  $_POST['act'] =='getAttrPrice')
 {
       $data = $_POST;
@@ -53,4 +53,5 @@ if(I("get.proto"))
       }
 
 }
+$ret['path']=$_REQUEST['path'];
 $view->display('checkout.twig',$ret);
